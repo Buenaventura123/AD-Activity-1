@@ -14,7 +14,7 @@
     </p>
 </div>
 
-<script src="/page/home/assets/js/home.js"></script>
+<script src="/page/home/assets/js/script.js"></script>
 
 <?php echo getFooter(); ?>
 </body>
