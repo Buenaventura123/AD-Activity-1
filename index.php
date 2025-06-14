@@ -1,6 +1,9 @@
-
+<?php include_once './layout/main.layout.php'; ?>
+<?php include_once './components/componentGroup/navbar.component.php'; ?>
+<?php include_once './components/componentGroup/footer.component.php'; ?>
 
 <nav>
+    <?php echo getNavbar('Home'); ?>
 </nav>
 
 <div class="main-content">
@@ -13,6 +16,7 @@
 
 <script src="/page/home/assets/js/home.js"></script>
 
+<?php echo getFooter(); ?>
 </body>
 
 </html>
