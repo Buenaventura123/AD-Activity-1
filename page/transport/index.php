@@ -93,7 +93,3 @@ require_once BASE_PATH . '/components/componentGroup/footer.component.php';
 <script src="/page/transport/assets/js/transport.js"></script>
 <?php echo getfooter(); ?>
 
-ILOVEVICTORRRILOVEVICTORRRILOVEVICTORRRILOVEVICTORRRILOVEVICTORRRILOVEVICTORRRILOVEVICTORRRILOVEVICTOR
-
-
-
