@@ -38,10 +38,15 @@
                     <button onclick="filterType('helmets')">Helmet</button>
                     <button onclick="filterType('tnt')">TNT</button>
                 </nav>
-                <div class="product-list">
-                    <?php foreach ($products as $product): ?>
-                        <div class="product" data-type="<?= $product['type'] ?>">
-                            <img src="assets/img/default.png" alt="<?= $product['name'] ?>" style="width:100%">
+            <div class="product-list">
+                <?php foreach ($products as $product): ?>
+                    <div class="product" data-type="<?= $product['type'] ?>">
+                        <?php if (isset($product['image'])): ?>
+                            <img src="../../page/tools/assets/img/<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" style="width:100%">
+                            <?php else: ?>
+                <div style="width:100%; height:150px; background:#eee; display:flex; align-items:center; justify-content:center;">No Image</div>
+            <?php endif; ?>
+
                             <h3><?= $product['name'] ?></h3>
                             <p>Type: <?= $product['type'] ?></p>
                             <p>Price: <?= $product['price'] ?></p>
