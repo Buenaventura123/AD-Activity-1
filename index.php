@@ -7,12 +7,17 @@
 </nav>
 
 <div class="main-content">
-    <h1 class="heading">GEMSTONE</h1>
+    <div class="heading-wrapper">
+        <img src="assets/img/eye.png" alt="sculpture" class="eye" />
+        <img src="assets/img/mouth.png" alt="sculpture" class="mouth" />
+        <h1 class="heading">GEMSTONE</h1>
+    </div>
     <p class="minitext">
         Discover the captivating beauty and unique properties of various gemstones, from their geological formation
         to their cultural significance and uses in jewelry and art.
     </p>
 </div>
+
 
 <script src="/page/home/assets/js/script.js"></script>
 
