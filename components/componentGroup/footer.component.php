@@ -7,3 +7,7 @@ function getFooter()
     </footer>';
 }
 ?>
+
+</body>
+
+</html>

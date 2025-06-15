@@ -12,10 +12,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
 
+    <!-- Swiper -->
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
     <!-- Global + Page CSS -->
     <link rel="stylesheet" href="/assets/css/navbar.css" />
     <link rel="stylesheet" href="/page/home/assets/css/style.css" />
     <link rel="stylesheet" href="/assets/css/footer.css" />
-</head>
 
-<body>
+</head>
