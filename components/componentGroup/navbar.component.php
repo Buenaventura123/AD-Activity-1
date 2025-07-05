@@ -3,10 +3,10 @@ function getNavbar($activePage)
 {
     $pages = [
         'Home' => '/',
-        'Tools' => '../../page/tools/index.php',
+        'Tools' => '/page/tools/index.php',
         'Minerals' => '#',
         'Job' => '#',
-        'Transport' => '#'
+        'Transport' => '/page/transport/index.php'
     ];
 
     $html = '<div class="navbar">';

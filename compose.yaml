@@ -2,9 +2,11 @@ services:
   web-app-php:
     build:
       context: .
-    container_name: web-app-php-service-ADTASK1
+    volumes:
+      - .:/var/www/html
+    container_name: web-app-php-service-final-project
     ports:
-      - "8000:8000"
+      - "6090:8000"
     develop:
       watch:
         - path: .
@@ -15,30 +17,31 @@ services:
         - path: ./composer.lock
           action: rebuild
     depends_on:
+      - postgresql
       - mongodb
 
   mongodb:
     image: mongo:latest
-    container_name: web-app-php-mongodb-ADTASK1
+    container_name: web-app-php-mongodb-final-project
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: rootPassword
-      MONGO_INITDB_DATABASE: mydatabase
+      MONGO_INITDB_DATABASE: finalproject
     ports:
-      - "27111:27017"
+      - "26969:27017"
     volumes:
       - web-app-php-mongodb:/data/db/mongodb
 
   postgresql:
     image: postgres:15
-    container_name: web-app-php-postgresql-ADTASK1
+    container_name: web-app-php-postgresql-final-project
     restart: always
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: mydatabase
+      POSTGRES_DB: finalproject
     ports:
-      - "5112:5432"
+      - "5269:5432"
     volumes:
       - web-app-php-postgresql:/data/db/postgresql
 
