@@ -1,4 +1,5 @@
 <?php
-define('BASE_PATH', '/AD-Activity-1/'); // Adjust if your folder name is different
-define('ROOT_PATH', value: __DIR__);
+define('BASE_PATH', realpath(__DIR__));
+// Adjust if your folder name is different
+chdir(BASE_PATH);
 ?>
