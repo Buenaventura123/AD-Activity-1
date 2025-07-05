@@ -2,7 +2,7 @@ services:
   web-app-php:
     build:
       context: .
-    container_name: web-app-php-service
+    container_name: web-app-php-service-ADTASK1
     ports:
       - "8000:8000"
     develop:
@@ -19,7 +19,7 @@ services:
 
   mongodb:
     image: mongo:latest
-    container_name: web-app-php-mongodb
+    container_name: web-app-php-mongodb-ADTASK1
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: rootPassword
@@ -31,7 +31,7 @@ services:
 
   postgresql:
     image: postgres:15
-    container_name: web-app-php-postgresql
+    container_name: web-app-php-postgresql-ADTASK1
     restart: always
     environment:
       POSTGRES_USER: user
