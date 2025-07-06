@@ -11,6 +11,12 @@ body {
   margin: auto;
   overflow: hidden;
   position: relative;
+  cursor: pointer;
+}
+
+.swiper-slide {
+  position: relative;
+  overflow: hidden;
 }
 
 .swiper-slide img {
@@ -19,6 +25,19 @@ body {
   width: 90%;
   height: 90%;
   object-fit: contain;
+}
+
+.swiper-slide:hover img {
+  opacity: 0.3s;
+}
+
+.swiper-slide .caption {
+  opacity: 0; 
+  transition: opacity 0.3s ease-in-out;
+}
+
+.swiper-slide:hover .caption {
+  opacity: 1;
 }
 
 .slide-content {

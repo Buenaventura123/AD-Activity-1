@@ -1,5 +1,10 @@
 const swiper = new Swiper('.swiper', {
     loop: true,
+    autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+    },
+
     navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
@@ -11,7 +16,15 @@ const swiper = new Swiper('.swiper', {
     }
 });
 
+const swiperstop = document.querySelector('.swiper');
+
+swiperstop.addEventListener('mouseenter', () => swiper.autoplay.stop());
+
+swiperstop.addEventListener('mouseleave', () => swiper.autoplay.start());
+
 function showVehicleDetails(name, imgSrc, description, price) {
+      swiper.autoplay.stop();
+
       document.querySelector('.swiper').classList.add('hidden');
       const detail = document.getElementById('vehicleDetail');
       detail.classList.remove('hidden');
@@ -25,4 +38,6 @@ function showVehicleDetails(name, imgSrc, description, price) {
     function goBackToCarousel() {
       document.getElementById('vehicleDetail').classList.add('hidden');
       document.querySelector('.swiper').classList.remove('hidden');
+
+      swiper.autoplay.start();
     }
