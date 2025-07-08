@@ -30,43 +30,32 @@ body {
     text-align: center;
 }
 
-.heading-wrapper {
-    position: relative;
-    display: inline-block;
-    margin-bottom: 2rem;
+.bgimage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 60%;
+    height: auto;
+    z-index: 1;
+    filter: drop-shadow(0 0 30px rgba(173, 216, 230, 0.7));
 }
 
 .heading {
-    font-size: 10vw;
+    font-size: 8vw;
     font-weight: 700;
-    z-index: 1;
-    position: relative;
-    color: #fff;
-}
-
-.eye {
-    position: absolute;
-    top: -85%;
-    left: -55%;
-    width: 80vw;
     z-index: 2;
-    pointer-events: none;
-}
-
-.mouth {
-    position: absolute;
-    top: -80%;
-    left: -30%;
-    width: 75vw;
-    z-index: 1;
-    pointer-events: none;
+    position: relative;
+    margin-top: -100px;
 }
 
 .minitext {
-    font-size: 1.4vw;
-    max-width: 500px;
+    font-size: clamp(0.9rem, 1.2vw, 1.2rem);
+    font-weight: 400;
     color: rgba(255, 255, 255, 0.8);
+    max-width: 500px;
     line-height: 1.5;
-    margin-top: 1rem;
-    z-index: 10;
+    margin-top: 20px;
+    z-index: 2;
+    position: relative;
 }
