@@ -1,12 +1,6 @@
-<?php
-require_once BASE_PATH . '/bootstrap.php';
-
-require_once LAYOUT_PATH . '/main.layout.php';
-require_once COMPONENT_PATH . '/componentGroup/navbar.component.php';
-require_once COMPONENT_PATH . '/componentGroup/footer.component.php';
-require_once HANDLERS_PATH . '/data.handler.php';
-
-?>
+<?php include_once './layout/main.layout.php'; ?>
+<?php include_once './components/componentGroup/navbar.component.php'; ?>
+<?php include_once './components/componentGroup/footer.component.php'; ?>
 
 <nav>
     <?php echo getNavbar('Home'); ?>
