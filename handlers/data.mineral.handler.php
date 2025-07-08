@@ -56,5 +56,5 @@ $minerals = [
         'description' => 'Primary ore of lead, heavily mined in ancient Greece for tools and coins.',
         'image' => 'galena.jpg'
     ],
-];dwdwdads
+];
 ?>
