@@ -1,4 +1,5 @@
 <?php
+use Dotenv\Dotenv;
 
 if (!defined('BASE_PATH')) {
     define('BASE_PATH', __DIR__ . '/../');
@@ -15,10 +16,10 @@ return [
         'db'  => $_ENV['MONGO_DB'],
     ],
     'postgres' => [
-        'host'     => $_ENV['POSTGRES_HOST'],
-        'port'     => $_ENV['POSTGRES_PORT'],
-        'db'       => $_ENV['POSTGRES_DB'],
-        'user'     => $_ENV['POSTGRES_USER'],
-        'password' => $_ENV['POSTGRES_PASSWORD'],
+        'host'     => $_ENV['POSTGRES_HOST'] ?? 'localhost',
+        'port'     => $_ENV['POSTGRES_PORT'] ?? '5432',
+        'db'       => $_ENV['POSTGRES_DB'] ?? 'mydatabase',
+        'user'     => $_ENV['POSTGRES_USER'] ?? 'myuser',
+        'password' => $_ENV['POSTGRES_PASSWORD'] ?? 'mypassword',
     ],
 ];
