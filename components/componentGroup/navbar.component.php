@@ -6,7 +6,8 @@ function getNavbar($activePage)
         'Tools' => '/page/tools/index.php',
         'Minerals' => '#',
         'Job' => '#',
-        'Transport' => '/page/transport/index.php'
+        'Transport' => '/page/transport/index.php',
+        'Add Stock' => '/page/addstock/index.php'
     ];
 
     $html = '<div class="navbar">';
