@@ -4,7 +4,7 @@ function getNavbar($activePage)
     $pages = [
         'Home' => '/',
         'Tools' => '/page/tools/index.php',
-        'Minerals' => '#',
+        'Minerals' => '/page/minerals/index.php',
         'Job' => '#',
         'Transport' => '/page/transport/index.php'
     ];

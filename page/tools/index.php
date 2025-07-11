@@ -34,6 +34,12 @@ require_once HANDLERS_PATH . '/data.handler.php';
                 </span>
             </div>
             <div class="main-box">
+                
+
+                <div class="search-container">
+                    <input id="searchInput" class="search" type="text" placeholder="Search…">
+                    <button onclick="searchProducts()" class="search-btn">Search</button>
+                    </div>
                 <nav>
                     <button onclick="filterType('all')">All</button>
                     <button onclick="filterType('pickaxes')">Pickaxes</button>
@@ -54,9 +60,16 @@ require_once HANDLERS_PATH . '/data.handler.php';
                             <h3><?= $product['name'] ?></h3>
                             <p>Type: <?= $product['type'] ?></p>
                             <p>Price: <?= $product['price'] ?></p>
+                            <div class="quantity">
+                            <button class="minus" aria-label="Decrease">-</button>
+                            <input type="number" class="input-box" value="0" min="0" max="999">
+                            <button class="plus" aria-label="Increase">+</button>
+                            </div>
                         </div>
+
                     <?php endforeach; ?>
                 </div>
+                <button class="add-cart">Add to Cart</button>
             </div>
         </main>
 

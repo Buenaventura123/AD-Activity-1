@@ -1,8 +1,12 @@
-<?php require_once __DIR__ . '../../bootstrap.php'; ?>
-<?php include_once ROOT_PATH . './layout/main.layout.php;'?>
-<?php include_once ROOT_PATH . '/handlers/data.mineral.handler.php';?>
-<?php include_once ROOT_PATH . '/components/componentGroup/navbar.component.php'; ?>
-<?php include_once ROOT_PATH . '/components/componentGroup/navbar.component.php'; ?>
+<?php 
+require_once BASE_PATH . '/bootstrap.php';
+
+require_once LAYOUT_PATH . '/main.layout.php';
+require_once COMPONENT_PATH . '/componentGroup/navbar.component.php';
+require_once COMPONENT_PATH . '/componentGroup/footer.component.php';
+require_once HANDLERS_PATH . '/data.handler.php';
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
