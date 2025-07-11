@@ -5,8 +5,8 @@ function getNavbar($activePage)
         'Home' => '/',
         'Tools' => '/page/tools/index.php',
         'Minerals' => '/page/minerals/index.php',
-        'Job' => '#',
         'Transport' => '/page/transport/index.php',
+        'Add to Cart' => '/page/addtocart/index.php',
         'Add Stock' => '/page/addstock/index.php'
     ];
 
