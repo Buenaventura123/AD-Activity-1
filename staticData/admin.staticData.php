@@ -31,8 +31,8 @@ return [
   [
     'username' => 'picoadmin',
     'password' => 'adminpass',
-    'first_name' => 'Brandon',
-    'middle_name' => 'palagay',
+    'first_name' => 'Brandon Allan',
+    'middle_name' => 'Alvarez',
     'last_name' => 'Pico'
   ]
 ];

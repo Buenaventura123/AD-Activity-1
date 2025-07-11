@@ -34,19 +34,19 @@ require_once HANDLERS_PATH . '/data.handler.php';
                 </span>
             </div>
             <div class="main-box">
-                
+                <form action="/page/addtocart/index.php" method="POST">
 
                 <div class="search-container">
                     <input id="searchInput" class="search" type="text" placeholder="Search…">
-                    <button onclick="searchProducts()" class="search-btn">Search</button>
+                    <button type="button" onclick="searchProducts()" class="search-btn">Search</button>
                     </div>
                 <nav>
-                    <button onclick="filterType('all')">All</button>
-                    <button onclick="filterType('pickaxes')">Pickaxes</button>
-                    <button onclick="filterType('shovels')">Shovels</button>
-                    <button onclick="filterType('drills')">Drills</button>
-                    <button onclick="filterType('helmets')">Helmet</button>
-                    <button onclick="filterType('tnt')">TNT</button>
+                    <button type="button" onclick="filterType('all')">All</button>
+                    <button type="button" onclick="filterType('pickaxes')">Pickaxes</button>
+                    <button type="button" onclick="filterType('shovels')">Shovels</button>
+                    <button type="button" onclick="filterType('drills')">Drills</button>
+                    <button type="button" onclick="filterType('helmets')">Helmet</button>
+                    <button type="button" onclick="filterType('tnt')">TNT</button>
                 </nav>
             <div class="product-list">
                 <?php foreach ($products as $product): ?>
@@ -61,15 +61,15 @@ require_once HANDLERS_PATH . '/data.handler.php';
                             <p>Type: <?= $product['type'] ?></p>
                             <p>Price: <?= $product['price'] ?></p>
                             <div class="quantity">
-                            <button class="minus" aria-label="Decrease">-</button>
-                            <input type="number" class="input-box" value="0" min="0" max="999">
-                            <button class="plus" aria-label="Increase">+</button>
+                            <button type="button" class="minus" aria-label="Decrease">-</button>
+                            <input type="number" class="input-box" name="quantities[<?= $product['id'] ?>]" value="0" min="0" max="999">
+                            <button type="button" class="plus" aria-label="Increase">+</button>
                             </div>
                         </div>
 
                     <?php endforeach; ?>
                 </div>
-                <button class="add-cart">Add to Cart</button>
+                <button class="add-cart">Add to Cart</button> </form>
             </div>
         </main>
 
