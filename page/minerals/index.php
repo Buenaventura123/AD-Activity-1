@@ -26,6 +26,11 @@ require_once HANDLERS_PATH . '/data.mineral.handler.php';
         </div>
 
         <div class="filter-container">
+            <div class="search-container">
+                    <input id="searchInput" class="search" type="text" placeholder="Search…">
+                    <button type="button" onclick="searchProducts()" class="search-btn">Search</button>
+            </div>
+            
             <div class="filter-buttons">
                 <button class="filter-btn active" data-type="all">All</button>
                 <button class="filter-btn" data-type="gemstone">Gemstone</button>
@@ -44,10 +49,17 @@ require_once HANDLERS_PATH . '/data.mineral.handler.php';
                         <p><strong>Origin:</strong> <?php echo $mineral['origin']; ?></p>
                         <p><strong>Type:</strong> <?php echo $mineral['type']; ?></p>
                         <p><?php echo $mineral['description']; ?></p>
+                        <div class="quantity">
+                            <button type="button" class="minus" aria-label="Decrease">-</button>
+                            <input type="number" class="input-box" name="quantities[<?= $product['id'] ?>]" value="0" min="0" max="999">
+                            <button type="button" class="plus" aria-label="Increase">+</button>
+                            </div>
                     </div>
+                    
                 <?php endforeach; ?>
             </div>
         </div>
+        <button class="add-cart">Add to Cart</button> </form>
     </div>
 
     <?php echo getFooter(); ?>

@@ -209,3 +209,50 @@ body {
         font-size: 1.8em;
     }
 }
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 1rem auto; /* auto left/right margin to center */
+  max-width: 600px;   /* or any width you prefer */
+  padding: 0 1rem;    /* optional, to add space on small screens */
+}
+
+
+.search {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+}
+
+.search-btn {
+  padding: 0.5rem 1.2rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.search-btn:hover {
+  background-color: #0056b3;
+}
+
+.add-cart{
+  width:100%;
+  margin-top:.5rem;
+  padding:.5rem 0;
+  background:#28a745;
+  color:#fff;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+  transition:background .3s;
+}
+
+.add-cart:hover{background:#1e7e34}
