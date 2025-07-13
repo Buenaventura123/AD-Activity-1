@@ -36,5 +36,20 @@ return [
     ['name' => "Chaos' Shock Charge", 'description' => '', 'price' => 125, 'category' => 'tnt', 'stock' => 10, 'image' => 'chaos.jpg'],
     ['name' => "Hecate's Hex Bomb", 'description' => '', 'price' => 110, 'category' => 'tnt', 'stock' => 10, 'image' => 'hecate.jpg'],
     ['name' => "Hydra's Blast Barrel", 'description' => '', 'price' => 130, 'category' => 'tnt', 'stock' => 10, 'image' => 'hydra.jpg'],
+    // Gemstones
+    ['id' => 1, "name" => "Amethyst", "type" => "gemstones", "price" => "$95", "origin" => "Greece", "image" => "amethyst.jpg"],
+    ['id' => 2, "name" => "Malachite", "type" => "gemstones", "price" => "$85", "origin" => "Laurion Mines", "image" => "malachite.jpg"],
+    ['id' => 3, "name" => "Azurite", "type" => "gemstones", "price" => "$90", "origin" => "Athens", "image" => "azurite.jpg"],
+    
+    // Ores
+    ['id' => 4, "name" => "Hematite", "type" => "ores", "price" => "$65", "origin" => "Thrace", "image" => "hematite.jpg"],
+    ['id' => 5, "name" => "Galena", "type" => "ores", "price" => "$75", "origin" => "Laurion Mines", "image" => "galena.jpg"],
+    
+    // Rocks
+    ['id' => 6, "name" => "Marble", "type" => "rocks", "price" => "$110", "origin" => "Paros", "image" => "marble.jpg"],
+    
+    // Minerals
+    ['id' => 7, "name" => "Gypsum", "type" => "minerals", "price" => "$55", "origin" => "Crete", "image" => "gypsum.jpg"],
+    ['id' => 8, "name" => "Lapis Lazuli", "type" => "minerals", "price" => "$120", "origin" => "Afghanistan", "image" => "lapila.jpg"]
 ];
 
