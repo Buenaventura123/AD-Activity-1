@@ -15,19 +15,10 @@ require_once HANDLERS_PATH . '/data.mineral.handler.php';
     <script src="../../page/minerals/assets/js/script.js" defer></script>
 </head>
 <body>
-    <?php echo getNavbar('Minerals'); ?>
-
-    <div class="price-marquee">
-    <marquee behavior="scroll" direction="left">
-        <?php 
-        
-        foreach ($minerals as $mineral) {
-            echo $mineral['name'] . ': $' . number_format($mineral['price'], 2) . ' • ';
-        }
-        ?>
-    </marquee>
+<div class="marquee-container">
+    <div class="marquee-content"></div>
 </div>
-
+    <?php echo getNavbar('Minerals'); ?>
     <div class="main-content">
         <div class="header-section">
             <h1>Greek Mineral</h1>
