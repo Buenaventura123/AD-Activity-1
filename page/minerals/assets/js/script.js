@@ -1,12 +1,25 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const filter = document.getElementById("typeFilter");
-    const cards = document.querySelectorAll(".card");
-
-    filter.addEventListener("change", () => {
-        const selected = filter.value;
-        cards.forEach(card => {
-            const type = card.getAttribute("data-type");
-            card.style.display = (selected === "all" || selected === type) ? "block" : "none";
+document.addEventListener("DOMContentLoaded", function() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const mineralCards = document.querySelectorAll('.mineral-card');
+    
+    filterMinerals('all');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            const filterType = this.getAttribute('data-type');
+            filterMinerals(filterType);
         });
     });
+    
+    function filterMinerals(type) {
+        mineralCards.forEach(card => {
+            if (type === 'all' || card.getAttribute('data-type') === type) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
 });
