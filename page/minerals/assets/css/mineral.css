@@ -140,6 +140,25 @@ body {
     width: 100%;
 }
 
+.price-marquee{
+    background-color: #0b1d51;
+    color: white;
+    padding: 10px 0;
+    position: sticky;
+    top: 60px;
+    z-index: 40;
+    font-weight: bold;
+}
+
+.price-marquee marquee{
+    font-size: 1.1em;
+    letter-spacing: 1px;
+}
+
+.price-marquee span-highlight{
+    color: #ffcc00;
+    font-weight: bold;
+}
 @media (max-width: 768px) {
     .mineral-list {
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
