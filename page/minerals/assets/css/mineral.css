@@ -39,12 +39,17 @@ body {
 
 .filter-container {
     background-color: #ffcc00;
-    padding: 1em;
+    padding: 1em 0; 
     text-align: center;
     position: sticky;
     top: 60px;
+    left: 0;
+    right: 0;
     z-index: 50;
     margin-bottom: 20px;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .filter-buttons {
@@ -52,6 +57,9 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     gap: 0.8em;
+    max-width: 1200px;
+    margin: 0 auto; 
+    padding: 0 15px;
 }
 
 .filter-btn {
