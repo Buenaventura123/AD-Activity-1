@@ -16,7 +16,23 @@ $pdo = new PDO(
 
 echo "✅ Connected to PostgreSQL for seeding\n";
 
+// 🌱 Seeding users
+$users = require_once STATICDATA_PATH . '/user.staticData.php';
+echo "🌱 Seeding users…\n";
+$stmt = $pdo->prepare("
+  INSERT INTO users (email, password, name, role)
+  VALUES (:email, :password, :name, :role)
+");
+foreach ($users as $u) {
+  $stmt->execute([
+    ':email' => $u['email'],
+    ':password' => password_hash($u['password'], PASSWORD_DEFAULT),
+    ':name' => $u['name'],
+    ':role' => $u['role'],
+  ]);
+}
 
+// 🌱 Seeding admin
 $admins = require_once STATICDATA_PATH . '/admin.staticData.php';
 echo "🌱 Seeding admins…\n";
 $stmt = $pdo->prepare("
@@ -33,7 +49,7 @@ foreach ($admins as $a) {
   ]);
 }
 
-
+// 🌱 Seeding customer
 $customers = require_once STATICDATA_PATH . '/customer.staticData.php';
 echo "🌱 Seeding customers…\n";
 $stmt = $pdo->prepare("
@@ -51,7 +67,7 @@ foreach ($customers as $c) {
   ]);
 }
 
-
+// 🌱 Seeding product
 $products = require_once STATICDATA_PATH . '/product.staticData.php';
 echo "🌱 Seeding products…\n";
 $stmt = $pdo->prepare("
@@ -67,5 +83,6 @@ foreach ($products as $p) {
     ':stock' => $p['stock'],
   ]);
 }
+
 
 echo "🎉 Seeding complete!\n";
