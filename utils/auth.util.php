@@ -40,15 +40,14 @@ class Auth
         }
 
         $hash = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $pdo->prepare('INSERT INTO users (username, password, first_name, middle_name, last_name) 
-            VALUES (:username, :password, :fn, NULL, :ln)');
+        $stmt = $pdo->prepare('INSERT INTO users (name, email, password) 
+        VALUES (:name, :email, :password)');
 
-        // Since your signup form only has "name" and "email", use name for first_name & last_name for now
+
         return $stmt->execute([
-            'username' => $email,
+            'name' => $name,
+            'email' => $email,
             'password' => $hash,
-            'fn' => $name,
-            'ln' => $name
         ]);
     }
 
