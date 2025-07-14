@@ -32,41 +32,6 @@ foreach ($users as $u) {
   ]);
 }
 
-// 🌱 Seeding admin
-$admins = require_once STATICDATA_PATH . '/admin.staticData.php';
-echo "🌱 Seeding admins…\n";
-$stmt = $pdo->prepare("
-  INSERT INTO admins (username, password, first_name, middle_name, last_name)
-  VALUES (:username, :password, :fn, :mn, :ln)
-");
-foreach ($admins as $a) {
-  $stmt->execute([
-    ':username' => $a['username'],
-    ':password' => password_hash($a['password'], PASSWORD_DEFAULT),
-    ':fn' => $a['first_name'],
-    ':mn' => $a['middle_name'],
-    ':ln' => $a['last_name'],
-  ]);
-}
-
-// 🌱 Seeding customer
-$customers = require_once STATICDATA_PATH . '/customer.staticData.php';
-echo "🌱 Seeding customers…\n";
-$stmt = $pdo->prepare("
-  INSERT INTO customers (username, password, first_name, middle_name, last_name, contact)
-  VALUES (:username, :password, :fn, :mn, :ln, :contact)
-");
-foreach ($customers as $c) {
-  $stmt->execute([
-    ':username' => $c['username'],
-    ':password' => password_hash($c['password'], PASSWORD_DEFAULT),
-    ':fn' => $c['first_name'],
-    ':mn' => $c['middle_name'],
-    ':ln' => $c['last_name'],
-    ':contact' => $c['contact'],
-  ]);
-}
-
 // 🌱 Seeding product
 $products = require_once STATICDATA_PATH . '/product.staticData.php';
 echo "🌱 Seeding products…\n";
@@ -85,52 +50,73 @@ foreach ($products as $p) {
   ]);
 }
 
-// 🌱 Seeding feedback
-$feedback = require_once STATICDATA_PATH . '/feedback.staticData.php';
-echo "🌱 Seeding feedback…\n";
-
-// Fetch user IDs and map them
-$userStmt = $pdo->query("SELECT id FROM users");
-$userIds = $userStmt->fetchAll(PDO::FETCH_COLUMN);
-$userRefs = [
-  'user_1' => $userIds[0] ?? null,
-  'user_2' => $userIds[1] ?? null,
-  'user_3' => $userIds[2] ?? null,
-  'user_4' => $userIds[3] ?? null,
-];
-
-// Fetch product IDs and map them
-$productStmt = $pdo->query("SELECT id FROM products");
-$productIds = $productStmt->fetchAll(PDO::FETCH_COLUMN);
-$productRefs = [
-  'prod_1' => $productIds[0] ?? null,
-  'prod_2' => $productIds[1] ?? null,
-  'prod_3' => $productIds[2] ?? null,
-];
+// 🌱 Seeding minerals
+$minerals = require_once STATICDATA_PATH . '/mineral.staticData.php';
+echo "🌱 Seeding minerals…\n";
 
 $stmt = $pdo->prepare("
-  INSERT INTO feedback (user_id, product_id, rating, comment, created_at)
-  VALUES (:user_id, :product_id, :rating, :comment, :created_at)
+  INSERT INTO minerals (name, origin, type, description, image, price, stock)
+  VALUES (:name, :origin, :type, :desc, :image, :price, :stock)
 ");
 
-foreach ($feedback as $f) {
-  $userId = $userRefs[$f['user_ref']] ?? null;
-  $productId = $productRefs[$f['product_ref']] ?? null;
+foreach ($minerals as $m) {
+  $stmt->execute([
+    ':name' => $m['name'],
+    ':origin' => $m['origin'],
+    ':type' => $m['type'],
+    ':desc' => $m['description'],
+    ':image' => $m['image'],
+    ':price' => $m['price'],
+    ':stock' => $m['stock']
+  ]);
+}
 
-  if (!$userId || !$productId) {
-    echo "⚠️  Skipping feedback due to missing user or product ID\n";
+// 🌱 Seeding cart
+$carts = require_once STATICDATA_PATH . '/cart.staticData.php';
+echo "🌱 Seeding carts…\n";
+
+// Fetch user IDs and map them again (only customers)
+$userStmt = $pdo->query("SELECT id FROM users WHERE role = 'user'");
+$customerIds = $userStmt->fetchAll(PDO::FETCH_COLUMN);
+$userRefs = [
+  'user_1' => $customerIds[0] ?? null,
+  'user_2' => $customerIds[1] ?? null,
+  'user_3' => $customerIds[2] ?? null,
+];
+
+// Fetch product IDs and prices
+$productStmt = $pdo->query("SELECT id, price FROM products");
+$productData = $productStmt->fetchAll(PDO::FETCH_ASSOC);
+$productRefs = [];
+foreach ($productData as $index => $row) {
+  $key = 'prod_' . ($index + 1);
+  $productRefs[$key] = [
+    'id' => $row['id'],
+    'price' => $row['price'],
+  ];
+}
+
+$stmt = $pdo->prepare("
+  INSERT INTO carts (user_id, product_id, quantity, price)
+  VALUES (:user_id, :product_id, :quantity, :price)
+");
+
+foreach ($carts as $c) {
+  $userId = $userRefs[$c['user_ref']] ?? null;
+  $product = $productRefs[$c['product_ref']] ?? null;
+
+  if (!$userId || !$product) {
+    echo "⚠️ Skipping cart item: Missing user or product reference\n";
     continue;
   }
 
   $stmt->execute([
     ':user_id' => $userId,
-    ':product_id' => $productId,
-    ':rating' => $f['rating'],
-    ':comment' => $f['comment'],
-    ':created_at' => $f['created_at'],
+    ':product_id' => $product['id'],
+    ':quantity' => $c['quantity'],
+    ':price' => $product['price'],
   ]);
 }
-
 
 
 
