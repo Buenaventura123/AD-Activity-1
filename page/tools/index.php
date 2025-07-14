@@ -77,10 +77,10 @@ $products = $productRepo->searchProducts($searchTerm, $categoryFilter);
                             <p>Price: <?= $product['price'] ?></p>
                             <p>Stock: <?=$product['stock'] ?></p>
                             <div class="quantity">
-                            <button type="button" class="minus" aria-label="Decrease">-</button>
-                            <input type="number" class="input-box" name="quantities[<?= $product['id'] ?>]" value="0" min="0" max="999">
-                            <button type="button" class="plus" aria-label="Increase">+</button>
-                            </div>
+                        <button type="button" class="minus" aria-label="Decrease">-</button>
+                        <input type="number" class="input-box" name="quantities[<?= $product['id'] ?>]" value="0" min="0" max="<?= $product['stock'] ?>">
+                        <button type="button" class="plus" aria-label="Increase">+</button>
+                    </div>
                         </div>
 
                     <?php endforeach; ?>
