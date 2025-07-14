@@ -36,6 +36,7 @@ return [
     ['name' => "Chaos' Shock Charge", 'description' => '', 'price' => 125, 'category' => 'tnt', 'stock' => 10, 'image' => 'chaos.jpg'],
     ['name' => "Hecate's Hex Bomb", 'description' => '', 'price' => 110, 'category' => 'tnt', 'stock' => 10, 'image' => 'hecate.jpg'],
     ['name' => "Hydra's Blast Barrel", 'description' => '', 'price' => 130, 'category' => 'tnt', 'stock' => 10, 'image' => 'hydra.jpg'],
+    
     // Gemstones
     ['id' => 1, "name" => "Amethyst", "type" => "gemstones", "price" => "$95", "origin" => "Greece", "image" => "amethyst.jpg"],
     ['id' => 2, "name" => "Malachite", "type" => "gemstones", "price" => "$85", "origin" => "Laurion Mines", "image" => "malachite.jpg"],

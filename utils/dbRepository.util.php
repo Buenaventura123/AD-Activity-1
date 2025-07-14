@@ -1,5 +1,5 @@
 <?php
-// connecting add stock page to db
+// connecting pages to db
 class ProductRepository {
     private PDO $db;
 
@@ -34,6 +34,28 @@ class ProductRepository {
     $stmt = $this->db->query("SELECT * FROM products ORDER BY name ASC");
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function searchProducts(string $search = '', string $category = ''): array {
+    $sql = "SELECT * FROM products WHERE 1=1";
+
+    $params = [];
+
+    if ($search !== '') {
+        $sql .= " AND name ILIKE :search";
+        $params[':search'] = '%' . $search . '%';
+    }
+
+    if ($category !== '' && $category !== 'all') {
+        $sql .= " AND category = :category";
+        $params[':category'] = $category;
+    }
+
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute($params);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 
 }
 

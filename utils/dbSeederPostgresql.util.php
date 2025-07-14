@@ -71,8 +71,8 @@ foreach ($customers as $c) {
 $products = require_once STATICDATA_PATH . '/product.staticData.php';
 echo "🌱 Seeding products…\n";
 $stmt = $pdo->prepare("
-  INSERT INTO products (name, description, price, category, stock)
-  VALUES (:name, :desc, :price, :cat, :stock)
+  INSERT INTO products (name, description, price, category, stock, image)
+  VALUES (:name, :desc, :price, :cat, :stock, :image)
 ");
 foreach ($products as $p) {
   $stmt->execute([
@@ -81,6 +81,7 @@ foreach ($products as $p) {
     ':price' => $p['price'],
     ':cat' => $p['category'],
     ':stock' => $p['stock'],
+    ':image' => $p['image']
   ]);
 }
 

@@ -4,5 +4,6 @@ CREATE TABLE IF NOT EXISTS products (
   description TEXT,
   price NUMERIC(10, 2) NOT NULL,
   category VARCHAR(100),
-  stock INTEGER DEFAULT 0
+  stock INTEGER DEFAULT 0,
+  image VARCHAR(255)
 );
