@@ -1,3 +1,4 @@
+-- Active: 1752487004889@@127.0.0.1@5269@finalproject
 CREATE TABLE IF NOT EXISTS users (
   id UUID NOT NULL PRIMARY KEY DEFAULT gen_random_uuid(),
   email VARCHAR(225) NOT NULL UNIQUE,
