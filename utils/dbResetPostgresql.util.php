@@ -16,7 +16,7 @@ $pdo = new PDO($dsn, $pgConfig['user'], $pgConfig['password'], [
 echo "✅ Connected to PostgreSQL\n";
 
 // Drop all tables (including new 'users')
-$tablesToDrop = ['cart', 'admins', 'products', 'customers', 'users'];
+$tablesToDrop = ['cart', 'admins', 'products', 'customers', 'users', 'feedback'];
 
 foreach ($tablesToDrop as $table) {
     try {
@@ -33,7 +33,8 @@ $sqlFiles = [
     'database/product.model.sql',
     'database/cart.model.sql',
     'database/admin.model.sql',
-    'database/user.model.sql', // ✅ new users table
+    'database/user.model.sql',
+    'database/feedback.model.sql',
 ];
 
 foreach ($sqlFiles as $file) {
@@ -63,7 +64,7 @@ foreach ($sqlFiles as $file) {
 
 // Truncate tables to reset data
 echo "🚮 Truncating tables…\n";
-$tablesToTruncate = ['admins', 'cart', 'customers', 'products', 'users'];
+$tablesToTruncate = ['admins', 'cart', 'customers', 'products', 'users', 'feedback'];
 
 foreach ($tablesToTruncate as $table) {
     try {

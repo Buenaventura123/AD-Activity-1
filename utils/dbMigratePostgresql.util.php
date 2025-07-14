@@ -22,7 +22,8 @@ foreach ([
     'cart',
     'products',
     'customers',
-    'admins'
+    'admins',
+    'feedback'
 ] as $table) {
     $pdo->exec("DROP TABLE IF EXISTS {$table} CASCADE;");
 }
@@ -33,6 +34,7 @@ $models = [
     'database/customer.model.sql',
     'database/product.model.sql',
     'database/cart.model.sql',
+    'database/feedback.model.sql'
 ];
 
 foreach ($models as $model) {

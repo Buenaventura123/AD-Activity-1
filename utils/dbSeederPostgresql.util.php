@@ -84,5 +84,53 @@ foreach ($products as $p) {
   ]);
 }
 
+// 🌱 Seeding feedback
+$feedback = require_once STATICDATA_PATH . '/feedback.staticData.php';
+echo "🌱 Seeding feedback…\n";
+
+// Fetch user IDs and map them
+$userStmt = $pdo->query("SELECT id FROM users");
+$userIds = $userStmt->fetchAll(PDO::FETCH_COLUMN);
+$userRefs = [
+  'user_1' => $userIds[0] ?? null,
+  'user_2' => $userIds[1] ?? null,
+  'user_3' => $userIds[2] ?? null,
+  'user_4' => $userIds[3] ?? null,
+];
+
+// Fetch product IDs and map them
+$productStmt = $pdo->query("SELECT id FROM products");
+$productIds = $productStmt->fetchAll(PDO::FETCH_COLUMN);
+$productRefs = [
+  'prod_1' => $productIds[0] ?? null,
+  'prod_2' => $productIds[1] ?? null,
+  'prod_3' => $productIds[2] ?? null,
+];
+
+$stmt = $pdo->prepare("
+  INSERT INTO feedback (user_id, product_id, rating, comment, created_at)
+  VALUES (:user_id, :product_id, :rating, :comment, :created_at)
+");
+
+foreach ($feedback as $f) {
+  $userId = $userRefs[$f['user_ref']] ?? null;
+  $productId = $productRefs[$f['product_ref']] ?? null;
+
+  if (!$userId || !$productId) {
+    echo "⚠️  Skipping feedback due to missing user or product ID\n";
+    continue;
+  }
+
+  $stmt->execute([
+    ':user_id' => $userId,
+    ':product_id' => $productId,
+    ':rating' => $f['rating'],
+    ':comment' => $f['comment'],
+    ':created_at' => $f['created_at'],
+  ]);
+}
+
+
+
 
 echo "🎉 Seeding complete!\n";
