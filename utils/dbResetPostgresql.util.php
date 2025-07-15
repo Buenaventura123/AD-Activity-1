@@ -15,8 +15,8 @@ $pdo = new PDO($dsn, $pgConfig['user'], $pgConfig['password'], [
 
 echo "✅ Connected to PostgreSQL\n";
 
-
-$tablesToDrop = ['cart', 'admins', 'products', 'customers'];
+// Drop all tables (including new 'users')
+$tablesToDrop = ['carts', 'products', 'users', 'minerals'];
 
 foreach ($tablesToDrop as $table) {
     try {
@@ -27,11 +27,12 @@ foreach ($tablesToDrop as $table) {
     }
 }
 
+// Apply schema files: existing + add user.model.sql
 $sqlFiles = [
-    'database/customer.model.sql',
+    'database/user.model.sql',
     'database/product.model.sql',
-    'database/cart.model.sql',
-    'database/admin.model.sql'
+    'database/mineral.model.sql',
+    'database/cart.model.sql'
 ];
 
 foreach ($sqlFiles as $file) {
@@ -45,7 +46,7 @@ foreach ($sqlFiles as $file) {
     $sql = file_get_contents($file);
 
     if (empty(trim($sql))) {
-        echo "⚠️  Skipping empty file: {$file}\n";
+        echo "⚠️ Skipping empty file: {$file}\n";
         continue;
     }
 
@@ -59,9 +60,9 @@ foreach ($sqlFiles as $file) {
     }
 }
 
-
+// Truncate tables to reset data
 echo "🚮 Truncating tables…\n";
-$tablesToTruncate = ['admins', 'cart', 'customers', 'products'];
+$tablesToTruncate = ['products', 'users', 'minerals','carts'];
 
 foreach ($tablesToTruncate as $table) {
     try {

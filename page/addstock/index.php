@@ -5,20 +5,29 @@ require_once UTILS_PATH . '/dbRepository.util.php';
 
 $db = getDatabaseConnection();
 $productRepo = new ProductRepository($db);
+$mineralRepo = new MineralRepository($db);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    $productId = $_POST['product_id'];
     $newStock = (int) $_POST['stock'];
 
-    $result = $productRepo->updateStock($productId, $newStock);
+    if (!empty($_POST['product_id'])) {
+        $productId = $_POST['product_id'];
+        $productRepo->updateStock($productId, $newStock);
+    }
+
+    if (!empty($_POST['mineral_id'])) {
+        $mineralId = $_POST['mineral_id'];
+        $mineralRepo->updateStock($mineralId, $newStock);
+    }
 
     header('Location: /page/addstock/index.php');
     exit;
 }
 
 
+
 $products = $productRepo->getAllProducts();
+$minerals = $mineralRepo->getAllMinerals();
 ?>
 
 <?php
@@ -34,22 +43,34 @@ $products = $productRepo->getAllProducts();
 </nav>
 
 <main class="container">
-    <h2>Update Product Stock</h2>
+    <h2>Update Stocks</h2>
     <form method="POST" class="stock-form">
-        <label for="product_id">Product:</label>
-        <select name="product_id" required>
-            <?php foreach ($products as $product): ?>
-                <option value="<?= $product['id'] ?>">
-                    <?= htmlspecialchars($product['name']) ?> (Current: <?= $product['stock'] ?>)
-                </option>
-            <?php endforeach; ?>
-        </select>
+    <h3>Product Stock</h3>
+    <select name="product_id" required>
+        <option disabled selected>Select a Product</option>
+        <?php foreach ($products as $product): ?>
+            <option value="<?= $product['id'] ?>">
+                <?= htmlspecialchars($product['name']) ?> (Current: <?= $product['stock'] ?>)
+            </option>
+        <?php endforeach; ?>
+    </select>
 
-        <label for="stock">New Stock:</label>
-        <input type="number" name="stock" min="0" required>
+    <h3>Mineral Stock</h3>
+    <select name="mineral_id" required>
+        <option disabled selected>Select a Mineral</option>
+        <?php foreach ($minerals as $mineral): ?>
+            <option value="<?= $mineral['id'] ?>">
+                <?= htmlspecialchars($mineral['name']) ?> (Current: <?= $mineral['stock'] ?>)
+            </option>
+        <?php endforeach; ?>
+    </select>
 
-        <button type="submit">Update Stock</button>
-    </form>
+    <label for="stock">New Stock to Add:</label>
+    <input type="number" name="stock" min="0" required>
+
+    <button type="submit">Update Stock</button>
+</form>
+
 </main>
 
 
