@@ -1,5 +1,5 @@
 <?php
-// connecting pages to db
+// connecting pages to Product db
 class ProductRepository {
     private PDO $db;
 
@@ -57,6 +57,31 @@ class ProductRepository {
 }
 
 
+}
+
+class MineralRepository {
+    private PDO $db;
+
+    public function __construct(PDO $db) {
+        $this->db = $db;
+    }
+
+    public function getAllMinerals() {
+        $stmt = $this->db->query("SELECT * FROM minerals ORDER BY name");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function updateStock($mineralId, $additionalStock) {
+        $stmt = $this->db->prepare("
+            UPDATE minerals 
+            SET stock = stock + :additional 
+            WHERE id = :id"
+        );
+        return $stmt->execute([
+            ':additional' => $additionalStock,
+            ':id' => $mineralId
+        ]);
+    }
 }
 
 ?>
