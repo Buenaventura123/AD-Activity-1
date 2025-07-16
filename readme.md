@@ -5,16 +5,16 @@
 <br />
 <div align="center">
   <a href="https://github.com/Buenaventura123/AD-Activity-1">
-
-    <img src="./assets/img/mininglogo.png" alt="Simisear Mining" width="130" height="100">
+    <img src="./assets/img/simisear.png" alt="Simisear" width="130" height="100">
   </a>
-
   <h3 align="center">Simisear Mining</h3>
-
+</div>
 
 <br />
 
+
 ![](https://visit-counter.vercel.app/counter.png?page=Buenaventura123/AD-Activity-1)
+
 
 
 ---
@@ -52,16 +52,15 @@
 Simisear Mining is an e-commerce platform where users can purchase mining tools, minerals, and transport services. Administrators manage stock quantities and inventory.
 
 ### Key Components
-
-<!-- TODO: List of Key Components -->
-<!-- The following are just sample -->
-
-- Authentication & Authorization
-- CRUD Operations for Invetory System
+- Cart Management
+- Order Processing
+- User Profile Management
+- Search & Filter Functionality
+- Admin Dashboard
+- Inventory Management
 
 ### Technology
 
-<!-- TODO: List of Technology Used -->
 #### Language
 ![HTML](https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white)
@@ -69,14 +68,13 @@ Simisear Mining is an e-commerce platform where users can purchase mining tools,
 ![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
 
 #### Framework/Library
-![CodeIgniter](https://img.shields.io/badge/CodeIgniter-EF4223?style=for-the-badge&logo=codeigniter&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
-![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)
+![Swiper](https://img.shields.io/badge/Swiper-48CAE4?style=for-the-badge)
 
 #### Databases
-![MySQL](https://img.shields.io/badge/MySQL-00758F?style=for-the-badge&logo=mysql&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)
+
+#### Deployment
+![Docker](https://img.shields.io/badge/Docker-0096C7?style=for-the-badge)
 
 ## Rules, Practices and Principles
 
@@ -140,10 +138,9 @@ AD-ProjectName
 
 ## Resources
 
-<!-- TODO: Add References -->
-
 | Title        | Purpose                                                                       | Link          |
 | ------------ | ----------------------------------------------------------------------------- | ------------- |
 | Font Awesome | Obtaining icons | https://fontawesome.com/ |
 | Swiper | Library for image carousel | https://swiperjs.com/ |
 | Gemini | Assistance for understanding and debugging codes | https://gemini.google.com/app |
+| ChatGPT | Assistance for understanding and debugging codes | https://chatgpt.com/ |
