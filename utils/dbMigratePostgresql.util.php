@@ -19,20 +19,20 @@ echo "✅ Connected to PostgreSQL for migration\n";
 
 echo "🗑️ Dropping old tables…\n";
 foreach ([
-    'cart',
+    'carts',
     'products',
-    'customers',
-    'admins'
+    'users',
+    'minerals',
 ] as $table) {
     $pdo->exec("DROP TABLE IF EXISTS {$table} CASCADE;");
 }
 
 
 $models = [
-    'database/admin.model.sql',
-    'database/customer.model.sql',
+    'database/user.model.sql',
     'database/product.model.sql',
     'database/cart.model.sql',
+    'database/mineral.model.sql'
 ];
 
 foreach ($models as $model) {
