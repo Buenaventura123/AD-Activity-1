@@ -63,6 +63,7 @@ $products = $productRepo->searchProducts($searchTerm, $categoryFilter);
                     <button type="button" onclick="filterType('helmets')">Helmet</button>
                     <button type="button" onclick="filterType('tnt')">TNT</button>
                 </nav>
+            <form method="POST" action="/page/addtocart/index.php">
             <div class="product-list">
                 <?php foreach ($products as $product): ?>
                     <div class="product" data-type="<?= $product['category'] ?>">
@@ -74,18 +75,18 @@ $products = $productRepo->searchProducts($searchTerm, $categoryFilter);
 
                             <h3><?= $product['name'] ?></h3>
                             <p>Type: <?= $product['category'] ?></p>
-                            <p>Price: <?= $product['price'] ?></p>
+                            <p>Price: $<?= $product['price'] ?></p>
                             <p>Stock: <?=$product['stock'] ?></p>
                             <div class="quantity">
                         <button type="button" class="minus" aria-label="Decrease">-</button>
-                        <input type="number" class="input-box" name="quantities[<?= $product['id'] ?>]" value="0" min="0" max="<?= $product['stock'] ?>">
+                        <input type="number" class="input-box" name="quantities[<?= $product['id'] ?>|product]" value="0" min="0" max="<?= $product['stock'] ?>">
                         <button type="button" class="plus" aria-label="Increase">+</button>
                     </div>
                         </div>
 
                     <?php endforeach; ?>
                 </div>
-                <button class="add-cart">Add to Cart</button> </form>
+                <button type="submit" class="add-cart">Add to Cart</button> </form>
             </div>
         </main>
 

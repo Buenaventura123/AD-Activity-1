@@ -1,6 +1,7 @@
 <?php
 $minerals = [
-    [
+    [   
+        'id' => 26,
         'name' => 'Amethyst',
         'origin' => 'Greece',
         'type' => 'Gemstone',
@@ -8,6 +9,7 @@ $minerals = [
         'image' => 'amethyst.jpg'
     ],
     [
+        'id' => 27,
         'name' => 'Hematite',
         'origin' => 'Thrace',
         'type' => 'Ore',
@@ -15,6 +17,7 @@ $minerals = [
         'image' => 'hematite.jpg'
     ],
     [
+        'id' => 28,
         'name' => 'Malachite',
         'origin' => 'Laurion Mines',
         'type' => 'Gemstones',
@@ -22,6 +25,7 @@ $minerals = [
         'image' => 'malachite.jpg'
     ],
     [
+        'id' => 29,
         'name' => 'Azurite',
         'origin' => 'Athens',
         'type' => 'Gemstones',
@@ -29,6 +33,7 @@ $minerals = [
         'image' => 'azurite.jpg'
     ],
     [
+        'id' => 30,
         'name' => 'Marble',
         'origin' => 'Paros',
         'type' => 'Rock',
@@ -36,6 +41,7 @@ $minerals = [
         'image' => 'marble.jpg'
     ],
     [
+        'id' => 31,
         'name' => 'Gypsum',
         'origin' => 'Crete',
         'type' => 'Mineral',
@@ -43,6 +49,7 @@ $minerals = [
         'image' => 'gypsum.jpg'
     ],
     [
+        'id' => 32,
         'name' => 'Lapis Lazuli',
         'origin' => 'Afghanistan',
         'type' => 'Mineral',
@@ -50,6 +57,7 @@ $minerals = [
         'image' => 'lapila.jpg'
     ],
     [
+        'id' => 33,
         'name' => 'Galena',
         'origin' => 'Laurion Mines',
         'type' => 'Ore',

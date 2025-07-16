@@ -13,7 +13,7 @@ class ProductRepository {
     }
 
     public function updateStock($productId, $additionalStock) {
-           $stmt = $this->db->prepare("
+        $stmt = $this->db->prepare("
         UPDATE products 
         SET stock = stock + :additional 
         WHERE id = :id"
@@ -65,6 +65,12 @@ class MineralRepository {
     public function __construct(PDO $db) {
         $this->db = $db;
     }
+    public function getById($id) {
+        $stmt = $this->db->prepare("SELECT * FROM minerals WHERE id = :id");
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
 
     public function getAllMinerals() {
         $stmt = $this->db->query("SELECT * FROM minerals ORDER BY name");
@@ -83,5 +89,35 @@ class MineralRepository {
         ]);
     }
 }
+
+class CartRepository {
+    private $db;
+
+    public function __construct(PDO $db) {
+        $this->db = $db;
+    }
+
+    public function getUserCartItems($userId) {
+        $stmt = $this->db->prepare("
+            SELECT c.product_id, c.quantity, c.price, p.name, p.image, p.category
+            FROM carts c
+            JOIN products p ON c.product_id = p.id
+            WHERE c.user_id = :user_id
+        ");
+        $stmt->execute(['user_id' => $userId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getCartTotal($userId) {
+        $stmt = $this->db->prepare("
+            SELECT SUM(c.quantity * c.price) as total
+            FROM carts c
+            WHERE c.user_id = :user_id
+        ");
+        $stmt->execute(['user_id' => $userId]);
+        return $stmt->fetchColumn();
+    }
+}
+
 
 ?>

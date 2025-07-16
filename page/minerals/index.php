@@ -4,9 +4,9 @@ require_once LAYOUT_PATH . '/main.layout.php';
 require_once COMPONENT_PATH . '/componentGroup/navbar.component.php';
 require_once COMPONENT_PATH . '/componentGroup/footer.component.php';
 require_once UTILS_PATH . '/dbConnection.util.php';
-require_once UTILS_PATH . '/dbRepository.util.php';
 
-class MineralRepository {
+
+class MineralRepository{
     private PDO $db;
 
     public function __construct(PDO $db) {
@@ -82,6 +82,7 @@ $minerals = $mineralRepo->searchMinerals($searchTerm, $categoryFilter);
     </div>
 
     <div class="minerals-container">
+        <form method="POST" action="/page/addtocart/index.php">
         <div class="mineral-list" id="mineralsContainer">
             <?php foreach ($minerals as $mineral): ?>
                 <div class="mineral-card" data-type="<?= strtolower($mineral['type']) ?>">
@@ -94,14 +95,14 @@ $minerals = $mineralRepo->searchMinerals($searchTerm, $categoryFilter);
                     <p><strong>Stock:</strong> <?= $mineral['stock'] ?></p>
                     <div class="quantity">
                         <button type="button" class="minus" aria-label="Decrease">-</button>
-                        <input type="number" class="input-box" name="quantities[<?= $mineral['id'] ?>]" value="0" min="0" max="<?= $mineral['stock'] ?>">
+                        <input type="number" class="input-box" name="quantities[<?= $mineral['id'] ?>|mineral]" value="0" min="0" max="<?= $mineral['stock'] ?>">
                         <button type="button" class="plus" aria-label="Increase">+</button>
                     </div>
                 </div>
             <?php endforeach; ?>
         </div>
     </div>
-    <button class="add-cart">Add to Cart</button>
+    <button type="submit" class="add-cart">Add to Cart</button> </form>
 </div>
 <?php echo getFooter(); ?>
 </body>
