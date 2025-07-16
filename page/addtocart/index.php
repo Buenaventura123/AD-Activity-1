@@ -10,44 +10,62 @@ $db = getDatabaseConnection();
 $productRepo = new ProductRepository($db);
 $mineralRepo = new MineralRepository($db);
 
-// Initialize cart
+
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
-// Handle POST (add/update items in cart)
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['quantities'])) {
-    foreach ($_POST['quantities'] as $compositeKey => $quantity) {
-        $parts = explode('|', $compositeKey);
-        if (count($parts) !== 2) continue;
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['quantities'])) {
+        foreach ($_POST['quantities'] as $compositeKey => $quantity) {
+            $parts = explode('|', $compositeKey);
+            if (count($parts) !== 2) continue;
 
-        list($productId, $type) = $parts;
-        $quantity = (int)$quantity;
+            list($productId, $type) = $parts;
+            $quantity = (int)$quantity;
 
-        if ($quantity > 0) {
-            $_SESSION['cart'][$compositeKey] = [
-                'quantity' => $quantity
-            ];
-        } else {
-            unset($_SESSION['cart'][$compositeKey]);
+            if ($quantity > 0) {
+                $_SESSION['cart'][$compositeKey] = [
+                    'quantity' => $quantity
+                ];
+            } else {
+                unset($_SESSION['cart'][$compositeKey]);
+            }
         }
+    }
+
+    if (isset($_POST['checkout'])) {
+        foreach ($_SESSION['cart'] as $compositeKey => $info) {
+            $parts = explode('|', $compositeKey);
+            if (count($parts) !== 2) continue;
+
+            list($productId, $type) = $parts;
+            $quantity = (int)$info['quantity'];
+
+            if ($type === 'product') {
+                $productRepo->updateStock($productId, -$quantity);
+            } elseif ($type === 'mineral') {
+                $mineralRepo->updateStock($productId, -$quantity);
+            }
+        }
+
+        $_SESSION['cart'] = [];
+        $purchaseCompleted = true;
     }
 }
 
-// Prepare cart data for display
 $cartItems = [];
 $totalCartPrice = 0;
+$purchaseCompleted = $purchaseCompleted ?? false;
 
 foreach ($_SESSION['cart'] as $compositeKey => $info) {
     $quantity = $info['quantity'];
 
-    // Parse the composite key
     $parts = explode('|', $compositeKey);
     if (count($parts) !== 2) continue;
 
     list($productId, $type) = $parts;
 
-    // Fetch item based on type
     if ($type === 'product') {
         $item = $productRepo->getById($productId);
         $imagePath = '/page/tools/assets/img/';
@@ -91,28 +109,38 @@ foreach ($_SESSION['cart'] as $compositeKey => $info) {
     <div class="main-box">
         <h1>Your Shopping Cart</h1>
 
+        <?php if ($purchaseCompleted): ?>
+            <div class="purchase-success">
+                <h3>✅ Purchase Completed!</h3>
+                <p>Thank you for your order.</p>
+            </div>
+        <?php endif; ?>
+
         <?php if (empty($cartItems)): ?>
             <p>Your cart is empty. Visit <a href="/page/tools/index.php">Tools</a> or <a href="/page/minerals/index.php">Minerals</a> to add items!</p>
         <?php else: ?>
-            <div class="cart-items-list">
-                <?php foreach ($cartItems as $item): ?>
-                    <div class="cart-item">
-                        <img src="<?= $item['image_path'] . htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['name']) ?>" class="cart-item-image">
-                        <div class="item-details">
-                            <h3><?= htmlspecialchars($item['name']) ?></h3>
-                            <p>Type: <?= htmlspecialchars($item['type']) ?></p>
-                            <p>Quantity: <?= htmlspecialchars($item['quantity']) ?></p>
-                            <p>Unit Price: $<?= number_format($item['unit_price'], 2) ?></p>
-                            <p>Subtotal: $<?= number_format($item['subtotal'], 2) ?></p>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+            <form method="POST">
+                <div class="cart-items-list">
+                    <?php foreach ($cartItems as $item): ?>
+                        <div class="cart-item">
+                            <img src="<?= $item['image_path'] . htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['name']) ?>" class="cart-item-image">
+                            <div class="item-details">
+                                <h3><?= htmlspecialchars($item['name']) ?></h3>
+                                <p>Type: <?= htmlspecialchars($item['type']) ?></p>
+                                <p>Unit Price: $<?= number_format($item['unit_price'], 2) ?></p>
+                                <p>Subtotal: $<?= number_format($item['subtotal'], 2) ?></p>
+                                <p>Quantity: <?= $item['quantity'] ?></p>
 
-            <div class="cart-summary">
-                <h2>Total Cart Price: $<?= number_format($totalCartPrice, 2) ?></h2>
-                <button class="checkout-btn">Proceed to Checkout</button>
-            </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+
+                <div class="cart-summary">
+                    <h2>Total Cart Price: $<?= number_format($totalCartPrice, 2) ?></h2>
+                    <button type="submit" name="checkout" value="true" class="checkout-btn">Proceed to Checkout</button>
+                </div>
+            </form>
         <?php endif; ?>
     </div>
 

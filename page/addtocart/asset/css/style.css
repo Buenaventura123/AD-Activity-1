@@ -118,3 +118,23 @@ nav{
 .main-box p a:hover {
     text-decoration: underline;
 }
+.purchase-success {
+    background-color: #e1f9e5;
+    border: 1px solid #9dd89d;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 20px;
+}
+.checkout-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.checkout-btn:hover {
+    background-color: #45a049;
+}
