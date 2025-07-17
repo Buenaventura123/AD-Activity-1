@@ -3,48 +3,10 @@ require_once BASE_PATH . '/bootstrap.php';
 require_once LAYOUT_PATH . '/main.layout.php';
 require_once COMPONENT_PATH . '/componentGroup/navbar.component.php';
 require_once COMPONENT_PATH . '/componentGroup/footer.component.php';
-require_once UTILS_PATH . '/dbConnection.util.php';
+require_once HANDLERS_PATH . '/mineralsearch.handler.php';
+require_once HANDLERS_PATH . '/renderMineralCards.handler.php';
 
-
-class MineralRepository{
-    private PDO $db;
-
-    public function __construct(PDO $db) {
-        $this->db = $db;
-    }
-
-    public function getAllMinerals(): array {
-        $stmt = $this->db->query("SELECT * FROM minerals ORDER BY name");
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public function searchMinerals(string $search, string $type): array {
-        $query = "SELECT * FROM minerals WHERE 1=1";
-        $params = [];
-
-        if (!empty($search)) {
-            $query .= " AND name ILIKE :search";
-            $params[':search'] = '%' . $search . '%';
-        }
-
-        if (!empty($type) && $type !== 'all') {
-            $query .= " AND type = :type";
-            $params[':type'] = $type;
-        }
-
-        $query .= " ORDER BY name";
-        $stmt = $this->db->prepare($query);
-        $stmt->execute($params);
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-}
-
-$db = getDatabaseConnection();
-$mineralRepo = new MineralRepository($db);
-$searchTerm = $_GET['search'] ?? '';
-$categoryFilter = $_GET['category'] ?? '';
-$minerals = $mineralRepo->searchMinerals($searchTerm, $categoryFilter);
+$minerals = getSearchedMinerals();
 ?>
 
 <!DOCTYPE html>
@@ -57,10 +19,13 @@ $minerals = $mineralRepo->searchMinerals($searchTerm, $categoryFilter);
     <script src="../../page/minerals/assets/js/script.js" defer></script>
 </head>
 <body>
+
 <div class="marquee-container">
     <div class="marquee-content"></div>
 </div>
+
 <?php echo getNavbar('Minerals'); ?>
+
 <div class="main-content">
     <div class="header-section">
         <h1>Greek Mineral</h1>
@@ -83,27 +48,15 @@ $minerals = $mineralRepo->searchMinerals($searchTerm, $categoryFilter);
 
     <div class="minerals-container">
         <form method="POST" action="/page/addtocart/index.php">
-        <div class="mineral-list" id="mineralsContainer">
-            <?php foreach ($minerals as $mineral): ?>
-                <div class="mineral-card" data-type="<?= strtolower($mineral['type']) ?>">
-                    <img src="assets/img/<?= htmlspecialchars($mineral['image']) ?>" alt="<?= htmlspecialchars($mineral['name']) ?>">
-                    <h2><?= htmlspecialchars($mineral['name']) ?></h2>
-                    <p><strong>Origin:</strong> <?= htmlspecialchars($mineral['origin']) ?></p>
-                    <p><strong>Type:</strong> <?= htmlspecialchars($mineral['type']) ?></p>
-                    <p><?= htmlspecialchars($mineral['description']) ?></p>
-                    <p><strong>Price:</strong> $<?= number_format($mineral['price'], 2) ?></p>
-                    <p><strong>Stock:</strong> <?= $mineral['stock'] ?></p>
-                    <div class="quantity">
-                        <button type="button" class="minus" aria-label="Decrease">-</button>
-                        <input type="number" class="input-box" name="quantities[<?= $mineral['id'] ?>|mineral]" value="0" min="0" max="<?= $mineral['stock'] ?>">
-                        <button type="button" class="plus" aria-label="Increase">+</button>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        </div>
+            <div class="mineral-list" id="mineralsContainer">
+                <?php renderMineralCards($minerals); ?>
+            </div>
+            <button type="submit" class="add-cart">Add to Cart</button>
+        </form>
     </div>
-    <button type="submit" class="add-cart">Add to Cart</button> </form>
 </div>
+
 <?php echo getFooter(); ?>
+
 </body>
 </html>

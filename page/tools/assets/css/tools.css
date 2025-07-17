@@ -65,6 +65,7 @@ header h1 {
 }
 
 .add-cart:hover{background:#1e7e34}
+
 nav {
     margin: 1em 0;
     text-align: center;
@@ -85,11 +86,14 @@ nav button {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
+
 nav button:hover {
     background-color: #0b1d51;
     /* Aegean blue on hover */
     transform: scale(1.05);
 }
+
+/* Removed empty nav button:active ruleset */
 
 .main-box {
     background-color: #ffffff;
@@ -117,15 +121,37 @@ nav button:hover {
 }
 
 .innertext {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 2em;
-    font-weight: bold;
-    text-shadow: 2px 2px 4px #000000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 2em;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px #000000;
+  text-align: center;
+  padding: 0 1em; /* ✅ prevents text from touching edges on small screens */
 }
+
+@media (max-width: 1024px) {
+  .innertext {
+    font-size: 1.6em;
+  }
+}
+
+@media (max-width: 768px) {
+  .innertext {
+    font-size: 1.3em;
+  }
+}
+
+@media (max-width: 480px) {
+  .innertext {
+    font-size: 1em;
+    padding: 0 0.5em;
+  }
+}
+
 
 .product-list {
     display: flex;
